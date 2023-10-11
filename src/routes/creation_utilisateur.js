@@ -12,7 +12,7 @@ module.exports= (server) => {
 
 
    
-    utilisateur.nom=req.body.nom;
+    utilisateur.speudo=req.body.speudo;
    
     utilisateur.email=req.body.email;
     utilisateur.status= 0;

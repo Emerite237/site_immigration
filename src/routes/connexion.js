@@ -1,6 +1,6 @@
 const {User} =require('../db/sequelize');
 const jwt =require('jsonwebtoken');
-const Token=require('../auth/auth');
+const Token=require('../db/auth/auth');
 
 
 module.exports= (app) => {

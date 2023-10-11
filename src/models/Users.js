@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true
       },
-      nom: {
+      speudo: {
         type: DataTypes.STRING,
         allowNull: false,
         unique:{ 
@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique:{ 
+          msg: "Cet email est déja pris "
+        },
         validate: {
           notEmpty: {msg: `Email ne doit pas être vide`},
           notNull: {msg: `Votre email est obligatoire merci de le renseigner`}

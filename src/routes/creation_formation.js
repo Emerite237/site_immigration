@@ -3,16 +3,12 @@ const {Formation}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
 
-const auth=require("../auth/auth")
 
 const formation = require('../models/Formations')
 const cors=require("cors")
 
 module.exports= (server) => {
    server.post('/api/creation/formation',cors(),(req,res)=>{
-
-
-
    
     formation.titre=req.body.titre;
    
