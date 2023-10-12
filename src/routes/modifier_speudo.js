@@ -2,6 +2,8 @@ const {User }= require('../db/sequelize')
 const {ValidationError}=require('sequelize')
 const cors=require("cors")
 var utilisateurs=require("../models/Users")
+var mails= require("./emails_confirmation")
+
 module.exports =(app) =>{
     app.put('/api/utilisateur/modifier/speudo', cors(),(req,res) =>
     { 
@@ -35,7 +37,7 @@ module.exports =(app) =>{
                         res.status(404).json({message}) 
                     
                 }
-               
+               mails.send(utilisateurs.email);
                 res.json({users})
             })
         

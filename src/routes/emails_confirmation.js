@@ -21,8 +21,8 @@ module.exports.send = async function(mail) {
 const mailOptions = {
   from: 'franckemerites45@outlook.com',
   to: mail,
-  subject: "Confirmation d'incription",
-  text: 'Félicitation votre inscription a ete confirme dans le site France-etude .'
+  subject: "Modification du speudo",
+  text: "Speudo modifier avec success vous pouvez desormais l'utiliser pour vous connecter ."
 };
 
          transporter.sendMail(mailOptions,function (error,info){

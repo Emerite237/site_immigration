@@ -2,7 +2,7 @@
 const {Video}= require('../db/sequelize')
 const {ValidationError}= require('sequelize')
 const {UniqueConstraintError}=require('sequelize')
-
+const videos=require("../models/Videos")
 const path= require("path")
 const multer =require("multer");
 
@@ -39,14 +39,32 @@ const storage =multer.diskStorage({
 
 module.exports= (server) => {
 
-  server.post('/api/uploads/video/:id',upload,cors(),async (req,res)=>{
+  server.put('/api/uploads/modifier/video/:id/:id_formation',upload,cors(),async (req,res)=>{
+
+        videos.path=req.file.path.replace(/\\/g, "/")
+        videos.nom=req.body.nom
+        videos.id_formation=req.params.id_formation
+
+        Video.update(videos,{
+            where: {id_videos: id}
+
+        })
+        .then(_=>{
+          return Video.findByPk(id).then(Videos => {
+                if(Videos===null)
+                {
+                    
+                    const message="la video n'existe pas "
+                        res.status(404).json({message}) 
+                    
+                }
+                const message='la video a bien ete modifie.'
+                res.json({Videos})
+            })
+        
+            })
     
-    var videos = req.files.map(file=>({path:file.path.replace(/\\/g, "/"),id_formation:req.params.id,nom:file.originalname}));
-    console.log(videos)
-    await Video.bulkCreate(videos).then(videos =>{
-     
-      res.json({videos})
-  }).catch(error => {
+  .catch(error => {
    if(error instanceof ValidationError ){
       console.log(error);
    return res.status(400).json({message: error.message,data: error})
