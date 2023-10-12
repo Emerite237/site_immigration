@@ -8,7 +8,7 @@ const {sequelize} = require('./src/db/sequelize')
 const ejs = require("ejs")
 const path= require("path")
 const expressJwt = require('express-jwt');
-const privatekey=require('./src/auth/private_key');
+const privatekey=require('./src/db/auth/private_key');
 const sequelizeSession = require('connect-session-sequelize')(session.Store)
 
 const cors =require('cors')
@@ -50,11 +50,16 @@ require('./src/routes/connexion')(app)                                // http://
 
 require('./src/routes/creation_utilisateur')(app)                    //  http://localhost:3000/api/register
 
+require("./src/routes/modifier_speudo")(app)                         // http://localhost:3000/api/utilisateur/modifier/speudo
+ 
+
 // point de terminaison de l'administrateur
 require('./src/routes/creation_formation')(app)                  // http://localhost:3000/api/creation/formation
 
 
-require('./src/routes/enregistrer_videos')(app)                 // http://localhost:3000/api/uploads/video/:id  id de la formation
+require('./src/routes/enregistrer_video_youtube')(app)        //  http://localhost:3000/api/creation/videoyoutube/:id   pour les videos youtubes
+
+require('./src/routes/enregistrer_videos')(app)                 // http://localhost:3000/api/uploads/video/:id  id de la formation  video a uploader
 
 require('./src/routes/enregistrer_images')(app)                 // http://localhost:3000/api/uploads/image/:id
 
@@ -66,8 +71,15 @@ require("./src/routes/liste_formation")(app)                   // http://localho
  
 require("./src/routes/lister_videos_id_formation")(app)        // http://localhost:3000/api/video/:id
 
+require("./src/routes/modifier_formation")(app)                  // http://localhost:3000/api/formation/modifier/:id
 
+require("./src/routes/modifier_video_uploader")(app)            // http://localhost:3000/api/uploads/modifier/video/:id/:id_formation
 
+require("./src/routes/modifier_videos")(app)                     // http://localhost:3000/api/video/modifier/:id
+
+require("./src/routes/")
+
+ 
 
 //point de terminaison admin
 
